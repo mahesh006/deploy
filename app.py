@@ -30,10 +30,12 @@ def home():
 
 @app.route("/recommendation", methods=["GET", "POST"])
 def recommendation():         
-    return render_template('index.html', videos=videos, entries=database.retrieve_entries(), entrie=database.retrieve_entries_video())
+    return render_template('index.html', videos=videos, entrie=database.retrieve_entries_video())
 
 
-
+@app.route("/recommendations", methods=["GET", "POST"])
+def recommendations():         
+    return render_template('video.html', videos=videos, entries=database.retrieve_entries() )
 
 
 
