@@ -19,11 +19,13 @@ def home():
         entry_content = request.form.get("content")
         entry_content1 = request.form.get("content1")
         database.create_entry_video(entry_content, datetime.datetime.today().strftime("%b %d"))
-        video = getYT.searchVideoForKeyword(entry_content1)
-        for indivvideo in video:
-            database.create_entry(entry_content, datetime.datetime.today().strftime("%b %d"), indivvideo)
-            videos.append(f'{indivvideo}')
- 
+      
+        res = entry_content1.strip('][').split(', ')
+        for words in res:
+            video = getYT.searchVideoForKeyword(words)
+            for indivvideo in video:
+                database.create_entry(entry_content, datetime.datetime.today().strftime("%b %d"), indivvideo)
+                videos.append(f'{indivvideo}')
     return render_template("home.html")
 
 
